@@ -1,0 +1,108 @@
+.post-card {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 var(--border);
+  padding: 20px;
+  transform: translateZ(0);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.post-card:hover {
+  transform: translate3d(-1px, -1px, 0);
+  box-shadow: 7px 7px 0 var(--border);
+}
+
+.post-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.02) 2px, transparent 2px);
+  background-size: 15px 15px;
+  pointer-events: none;
+}
+
+.post-card .post-title {
+  font-size: 1.6rem;
+  margin: 0 0 10px;
+}
+
+.excerpt {
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+
+.meta {
+  font-size: 0.8rem;
+  margin-bottom: 0;
+  opacity: 0.85;
+}
+
+:host(.featured) .post-title {
+  font-size: 1.8rem;
+}
+
+:host(.featured) .excerpt {
+  font-size: 1.2rem;
+}
+
+:host(.featured) .meta {
+  font-size: 1rem;
+}
+
+.post-card.red,
+.post-card.green,
+.post-card.teal,
+.post-card.blue,
+.post-card.magenta {
+  color: var(--text-light);
+  .post-title {
+    text-shadow: 3px 3px 0 var(--border);
+  }
+}
+
+.post-card.red {
+  background: var(--card-red);
+}
+
+.post-card.green {
+  background: var(--card-green);
+}
+
+.post-card.teal {
+  background: var(--card-teal);
+}
+
+.post-card.blue {
+  background: var(--card-blue);
+}
+
+.post-card.magenta {
+  background: var(--card-magenta);
+}
+
+.featured-sticker {
+  position: absolute;
+  top: -25px;
+  right: 25px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  background: var(--accent);
+  color: var(--text-dark);
+  border: 3px solid var(--border);
+  border-radius: 5px;
+  box-shadow: 2px 2px 0 var(--border);
+  transform: rotate(-3deg);
+  background-image: radial-gradient(rgba(139, 66, 44, 0.25) 2px, transparent 3px);
+  background-size: 15px 15px;
+}

@@ -1,0 +1,26 @@
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin: 0 auto;
+}
+
+.toc {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+}
+
+.article-wrapper,
+article {
+  max-width: 720px;
+}
+
+@media (max-width: 800px) {
+  .blog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .toc {
+    position: static;
+  }
+}

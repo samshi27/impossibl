@@ -1,0 +1,59 @@
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.post-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  background: var(--surface);
+  border: 3px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 5px 5px 0 var(--border);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.post-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.02) 2px, transparent 2px);
+  background-size: 15px 15px;
+  pointer-events: none;
+}
+
+.status {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border: 3px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 var(--border);
+  font-weight: 500;
+  transform: rotate(-2deg);
+}
+
+.status-published {
+  background: var(--color-green);
+  color: var(--text-light);
+}
+
+.status-draft {
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.post-row-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}

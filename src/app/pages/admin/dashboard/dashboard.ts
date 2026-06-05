@@ -1,0 +1,14 @@
+import { Component, inject } from '@angular/core';
+import { PostService } from '../../../services/post';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-dashboard',
+  imports: [RouterLink],
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.scss',
+})
+export class Dashboard {
+  private postService = inject(PostService);
+  posts = this.postService.allPosts;
+}

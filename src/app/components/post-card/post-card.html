@@ -1,0 +1,20 @@
+<a class="post-card" [class]="variant()" [routerLink]="['/blog', post()?.slug]">
+  @if (featured()) {
+    <span class="featured-sticker">featured</span>
+  }
+
+  <div>
+    <p class="post-title">{{ post()?.title }}</p>
+    <p class="excerpt">{{ post()?.excerpt }}</p>
+  </div>
+
+  <div>
+    @if (post(); as p) {
+      <app-tags [tags]="p.tags" />
+      <p class="meta">
+        {{ p.author }} · {{ p.publishedAt | date: 'd MMM yyyy' }} ·
+        {{ readTime(p.body) }}
+      </p>
+    }
+  </div>
+</a>

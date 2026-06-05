@@ -1,0 +1,13 @@
+<div class="tag-view">
+  <h1>Posts tagged "{{ tag() }}"</h1>
+
+  @if (posts().length) {
+    <div class="post-grid">
+      @for (post of posts(); track post.slug; let i = $index) {
+        <app-post-card [post]="post" [variant]="variants[i % variants.length]" />
+      }
+    </div>
+  } @else {
+    <p>No posts found for this tag.</p>
+  }
+</div>

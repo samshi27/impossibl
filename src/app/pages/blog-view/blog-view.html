@@ -1,0 +1,29 @@
+@if (post(); as p) {
+  <div class="blog-layout">
+    <nav class="toc">
+      <p>Contents</p>
+      <ul>
+        @for (h of headings(); track h) {
+          <li>
+            <a [routerLink]="[]" [fragment]="h.id">{{ h.text }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <article>
+      <h1>{{ p.title }}</h1>
+      <p class="meta">
+        {{ p.author }} · {{ p.publishedAt | date: 'd MMM yyyy' }} · {{ readTime(p.body) }}
+      </p>
+
+      <app-tags [tags]="p.tags" categoryBaseRoute="/blog/tag" />
+
+      <div class="body">
+        <markdown [data]="p.body" [disableSanitizer]="true" />
+      </div>
+    </article>
+  </div>
+} @else {
+  <p>Post not found.</p>
+}

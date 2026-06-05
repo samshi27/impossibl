@@ -1,0 +1,61 @@
+<div class="post-meta">
+  <div>
+    <label>Title</label>
+    <input
+      [ngModel]="title()"
+      (ngModelChange)="title.set($event)"
+      type="text"
+      placeholder="Post title"
+    />
+  </div>
+  <div>
+    <label>Excerpt</label>
+    <input
+      [ngModel]="excerpt()"
+      (ngModelChange)="excerpt.set($event)"
+      type="text"
+      placeholder="A short teaser"
+    />
+  </div>
+  <div>
+    <label>Author</label>
+    <input
+      [ngModel]="author()"
+      (ngModelChange)="author.set($event)"
+      type="text"
+      placeholder="Samshi"
+    />
+  </div>
+  <div>
+    <label>Tags (comma-separated)</label>
+    <input
+      [ngModel]="tags()"
+      (ngModelChange)="tags.set($event)"
+      type="text"
+      placeholder="meta, angular, webdev"
+    />
+  </div>
+</div>
+
+<div class="editor-layout">
+  <div class="editor-pane">
+    <label>Body (markdown)</label>
+    <textarea
+      [ngModel]="body()"
+      (ngModelChange)="body.set($event)"
+      placeholder="Write your post in markdown..."
+    ></textarea>
+  </div>
+
+  <div class="preview-pane">
+    <label>Preview</label>
+    <div class="preview-content">
+      <markdown [data]="body()" [disableSanitizer]="true" />
+    </div>
+  </div>
+</div>
+
+<div class="button-layout">
+  <button type="button" (click)="save()" class="primary-button">Save</button>
+  <button type="button" (click)="publish()" class="primary-button">Publish</button>
+</div>
