@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { PostService } from '../../services/post';
 import { PostCard } from '../../components/post-card/post-card';
-import { CARD_VARIANTS } from '../../constants/card_variant';
+import { CARD_VARIANTS } from '../../constants/card-variants';
 
 @Component({
   selector: 'app-home',

@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Tags } from '../tags/tags';
 import { readTime } from '../../utils/read-time';
-import { CardVariant } from '../../constants/card_variant';
+import { CardVariant } from '../../constants/card-variants';
 
 @Component({
   selector: 'app-post-card',
