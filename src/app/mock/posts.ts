@@ -11,6 +11,8 @@ export const MOCK_POSTS: Post[] = [
 
 The original build looked gorgeous but fought me at every turn. The layout was a showpiece, not a blog. Every post got squeezed into a rigid square tile, titles wrapped in ugly places, and there was never enough room for the actual writing.
 
+---
+
 The deeper problem was that I designed it *visually first* without asking what the page was actually for. A blog is for reading. The square-grid was for looking at. When form and function fight like that, you lose the will to keep going - which is exactly what happened.
 
 ## The new stack
