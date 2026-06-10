@@ -1,23 +1,16 @@
-.home-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@use 'breakpoints' as bp;
 
 .post-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   width: 100%;
+
+  @include bp.respond-below(md) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .post-grid .featured {
   grid-column: 1 / -1;
-  height: 300px;
-}
-
-@media (max-width: 700px) {
-  .post-grid {
-    grid-template-columns: 1fr;
-  }
 }

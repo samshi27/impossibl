@@ -1,0 +1,19 @@
+$bp-sm: 640px; // large phone
+$bp-md: 768px; // tablet portrait
+$bp-lg: 1024px; // tablet landscape / small laptop
+$bp-xl: 1280px; // desktop
+
+$breakpoints: (
+  sm: $bp-sm,
+  md: $bp-md,
+  lg: $bp-lg,
+  xl: $bp-xl,
+);
+
+// desktop-first
+@mixin respond-below($name) {
+  $width: map-get($breakpoints, $name);
+  @media (max-width: $width) {
+    @content;
+  }
+}

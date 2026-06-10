@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .post-card {
   cursor: pointer;
   position: relative;
@@ -45,18 +47,6 @@
   opacity: 0.85;
 }
 
-:host(.featured) .post-title {
-  font-size: 1.8rem;
-}
-
-:host(.featured) .excerpt {
-  font-size: 1.2rem;
-}
-
-:host(.featured) .meta {
-  font-size: 1rem;
-}
-
 .post-card.red,
 .post-card.green,
 .post-card.teal,
@@ -90,7 +80,7 @@
 
 .featured-sticker {
   position: absolute;
-  top: -35px;
+  top: -25px;
   right: 25px;
   font-size: 1.3rem;
   font-weight: 700;
@@ -105,4 +95,9 @@
   transform: rotate(-3deg);
   background-image: radial-gradient(rgba(139, 66, 44, 0.25) 2px, transparent 3px);
   background-size: 15px 15px;
+
+  @include bp.respond-below(md) {
+    top: -40px;
+    right: 15px;
+  }
 }

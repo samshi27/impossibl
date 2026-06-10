@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .tag-view h1 {
   margin-bottom: 2rem;
 }
@@ -6,10 +8,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-}
 
-@media (max-width: 700px) {
-  .post-grid {
+  @include bp.respond-below(md) {
     grid-template-columns: 1fr;
   }
 }
