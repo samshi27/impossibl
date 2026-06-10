@@ -1,7 +1,6 @@
 @use 'breakpoints' as bp;
 @use 'markdown' as md;
 
-// layout
 .editor-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -12,39 +11,12 @@
   }
 }
 
-// labels
 label {
   display: block;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 500;
   margin-bottom: 1rem;
-}
-
-// shared styles - inputs, textarea
-input,
-textarea {
-  width: 100%;
-  color: var(--text-light);
-  position: relative;
-  background-color: var(--surface);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.01) 2px, transparent 2px);
-  background-size: 15px 15px;
-  border: 3px solid var(--border);
-  box-shadow: 5px 5px 0 var(--border);
-  font-size: 1rem;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--accent);
-  opacity: 0.6;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-  box-shadow: 5px 5px 0 var(--accent);
 }
 
 .field-error {
@@ -56,7 +28,6 @@ textarea:focus {
   color: var(--text-light);
 }
 
-// meta input
 .post-meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -69,34 +40,28 @@ textarea:focus {
   }
 }
 
-input {
-  padding: 12px 16px;
-  border-radius: 8px;
-}
-
-// body textarea, preview pane
-textarea,
 .preview-content {
   position: relative;
   min-height: 400px;
   padding: 16px;
   border: 3px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 5px 5px 0 var(--border);
+  border-radius: 7px;
+  box-shadow: 3px 3px 0 var(--border);
   color: var(--text-light);
 }
 
 textarea {
+  min-height: 400px;
+  padding: 16px;
+  border-radius: 7px;
   line-height: 1.6;
   resize: vertical;
 }
 
-// markdown preview render
 .markdown-body {
   @include md.markdown-typography;
 }
 
-// buttons
 .button-layout {
   display: flex;
   gap: 1rem;

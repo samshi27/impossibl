@@ -16,8 +16,8 @@
   margin-bottom: 1rem;
   background: var(--surface);
   border: 3px solid var(--border);
-  border-radius: 8px;
-  box-shadow: 5px 5px 0 var(--border);
+  border-radius: 7px;
+  box-shadow: 3px 3px 0 var(--border);
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
@@ -53,8 +53,8 @@
   letter-spacing: 1px;
   padding: 3px 10px;
   border: 3px solid var(--border);
-  border-radius: 4px;
-  box-shadow: 2px 2px 0 var(--border);
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 var(--border);
   font-weight: 500;
   transform: rotate(-2deg);
 }
