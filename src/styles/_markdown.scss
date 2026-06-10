@@ -1,0 +1,12 @@
+// Shared typography for ngx-markdown rendered output.
+// Included inside each component under a scoped parent, so ::ng-deep
+// stays caged to that component despite the rules living here.
+@mixin markdown-typography {
+  ::ng-deep {
+    hr {
+      border: none;
+      border-top: 3px solid var(--text-light);
+      margin: 1.2rem 0;
+    }
+  }
+}

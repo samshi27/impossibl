@@ -1,4 +1,5 @@
 @use 'breakpoints' as bp;
+@use 'markdown' as md;
 
 .blog-layout {
   display: grid;
@@ -22,4 +23,8 @@
   @include bp.respond-below(md) {
     display: none;
   }
+}
+
+.markdown-body {
+  @include md.markdown-typography;
 }

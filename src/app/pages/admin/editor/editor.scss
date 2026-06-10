@@ -1,4 +1,5 @@
 @use 'breakpoints' as bp;
+@use 'markdown' as md;
 
 // layout
 .editor-layout {
@@ -91,8 +92,8 @@ textarea {
 }
 
 // markdown preview render
-.preview-content ::ng-deep hr {
-  border-color: var(--text-light);
+.markdown-body {
+  @include md.markdown-typography;
 }
 
 // buttons
