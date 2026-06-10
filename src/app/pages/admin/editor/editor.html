@@ -7,6 +7,15 @@
       type="text"
       placeholder="Post title"
     />
+    @if (attempted() && !titleValid()) {
+      <span class="field-error">
+        @if (attempted() === STATUS.PUBLISHED) {
+          Title is required to publish.
+        } @else {
+          Title is required.
+        }
+      </span>
+    }
   </div>
   <div>
     <label>Excerpt</label>
@@ -16,6 +25,9 @@
       type="text"
       placeholder="A short teaser"
     />
+    @if (attempted() === STATUS.PUBLISHED && !excerptValid()) {
+      <span class="field-error">Excerpt is required to publish.</span>
+    }
   </div>
   <div>
     <label>Author</label>
@@ -25,6 +37,9 @@
       type="text"
       placeholder="Samshi"
     />
+    @if (attempted() === STATUS.PUBLISHED && !authorValid()) {
+      <span class="field-error">Author is required to publish.</span>
+    }
   </div>
   <div>
     <label>Tags (comma-separated)</label>
@@ -45,6 +60,9 @@
       (ngModelChange)="body.set($event)"
       placeholder="Write your post in markdown..."
     ></textarea>
+    @if (attempted() === STATUS.PUBLISHED && !bodyValid()) {
+      <span class="field-error">Body is required to publish.</span>
+    }
   </div>
 
   <div class="preview-pane">

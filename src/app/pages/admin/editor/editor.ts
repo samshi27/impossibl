@@ -16,6 +16,7 @@ import { POST_STATUS, PostStatus } from '../../../constants/post-status';
 export class Editor {
   private postService = inject(PostService);
   private router = inject(Router);
+  protected readonly STATUS = POST_STATUS;
   slug = input<string>();
   post = computed(() => {
     const s = this.slug();
@@ -29,11 +30,27 @@ export class Editor {
   tags = linkedSignal(() => this.post()?.tags.join(', ') ?? '');
   body = linkedSignal(() => this.post()?.body ?? '');
 
+  attempted = signal<PostStatus | null>(null);
+
+  titleValid = computed(() => this.title().trim().length > 0);
+  excerptValid = computed(() => this.excerpt().trim().length > 0);
+  authorValid = computed(() => this.author().trim().length > 0);
+  bodyValid = computed(() => this.body().trim().length > 0);
+
+  canSave = computed(() => this.titleValid());
+  canPublish = computed(
+    () => this.titleValid() && this.excerptValid() && this.authorValid() && this.bodyValid(),
+  );
+
   save() {
+    this.attempted.set(POST_STATUS.DRAFT);
+    if (!this.canSave()) return;
     this.savePost(POST_STATUS.DRAFT);
   }
 
   publish() {
+    this.attempted.set(POST_STATUS.PUBLISHED);
+    if (!this.canPublish()) return;
     this.savePost(POST_STATUS.PUBLISHED);
   }
 
