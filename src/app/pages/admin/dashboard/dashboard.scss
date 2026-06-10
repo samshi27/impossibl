@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -6,7 +8,7 @@
 
 .post-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 1.5rem;
   position: relative;
@@ -19,6 +21,21 @@
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
+
+  @include bp.respond-below(md) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @include bp.respond-below(md) {
+    justify-content: space-between;
+  }
 }
 
 .post-row::before {
@@ -53,7 +70,9 @@
 }
 
 .post-row-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-  font-weight: 700;
+  margin: 0 0 1rem 0;
+}
+
+.post-row-excerpt {
+  margin: 0;
 }
