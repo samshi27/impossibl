@@ -36,4 +36,18 @@ export class PostService {
   updatePost(updated: Post): void {
     this.postsSignal.update((posts) => posts.map((p) => (p.id === updated.id ? updated : p)));
   }
+
+  searchPosts(query: string): Post[] {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+
+    return this.postsSignal().filter((p) => {
+      if (p.status !== POST_STATUS.PUBLISHED) return false;
+      return (
+        p.title.toLowerCase().includes(q) ||
+        p.excerpt.toLowerCase().includes(q) ||
+        p.tags.some((tag) => tag.toLowerCase().includes(q))
+      );
+    });
+  }
 }

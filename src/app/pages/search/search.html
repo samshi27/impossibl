@@ -1,1 +1,24 @@
-<p>search works!</p>
+<div class="search-bar">
+  <input
+    [ngModel]="searchTerm()"
+    (ngModelChange)="searchTerm.set($event)"
+    (keyup.enter)="search()"
+    type="text"
+    placeholder="Search posts..."
+  />
+  <button type="button" class="primary-button" (click)="search()">Search</button>
+</div>
+
+@if (submittedTerm()) {
+  @if (results().length) {
+    <div class="post-grid">
+      @for (post of results(); track post.slug; let i = $index) {
+        <app-post-card [post]="post" [variant]="variants[i % variants.length]" />
+      }
+    </div>
+  } @else {
+    <p class="no-results">No posts found for "{{ submittedTerm() }}".</p>
+  }
+} @else {
+  <p class="search-hint">Search for a post by title, excerpt, or tag.</p>
+}

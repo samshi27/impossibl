@@ -1,0 +1,22 @@
+@use 'breakpoints' as bp;
+
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  @include bp.respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.no-results,
+.search-hint {
+  font-size: 1rem;
+}
