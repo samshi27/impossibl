@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Tags } from '../tags/tags';
 import { readTime } from '../../utils/read-time';
+import { CardVariant } from '../../constants/card_variant';
 
 @Component({
   selector: 'app-post-card',
@@ -14,6 +15,6 @@ import { readTime } from '../../utils/read-time';
 export class PostCard {
   post = input<Post>();
   featured = input<boolean>(false);
-  variant = input<'red' | 'green' | 'blue' | 'teal' | 'magenta'>('blue');
+  variant = input<CardVariant>('blue');
   readTime = readTime;
 }

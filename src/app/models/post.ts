@@ -1,3 +1,5 @@
+import { PostStatus } from '../constants/post-status';
+
 export interface Post {
   id: number;
   title: string;
@@ -15,5 +17,3 @@ export interface Post {
   updatedBy: string;
   publishedAt: string | null;
 }
-
-export type PostStatus = 'draft' | 'published' | 'archived';

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { PostService } from '../../services/post';
 import { PostCard } from '../../components/post-card/post-card';
+import { CARD_VARIANTS } from '../../constants/card_variant';
 
 @Component({
   selector: 'app-home',
@@ -14,5 +15,5 @@ export class Home {
   featuredPost = this.postService.featuredPost;
   regularPosts = this.postService.regularPosts;
 
-  variants = ['red', 'green', 'blue', 'teal', 'magenta'] as const;
+  variants = CARD_VARIANTS;
 }

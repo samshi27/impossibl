@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { PostService } from '../../services/post';
 import { PostCard } from '../../components/post-card/post-card';
+import { CARD_VARIANTS } from '../../constants/card_variant';
 
 @Component({
   selector: 'app-tag-view',
@@ -16,5 +17,5 @@ export class TagView {
     const tag = this.tag();
     return tag ? this.postService.getPostsByTag(tag) : [];
   });
-  variants = ['red', 'green', 'blue', 'teal', 'magenta'] as const;
+  variants = CARD_VARIANTS;
 }
