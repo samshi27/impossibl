@@ -10,17 +10,12 @@
   align-self: start;
 }
 
-.article-wrapper,
-article {
-  max-width: 720px;
-}
-
 @media (max-width: 800px) {
   .blog-layout {
     grid-template-columns: 1fr;
   }
 
   .toc {
-    position: static;
+    display: none;
   }
 }
