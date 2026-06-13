@@ -1,0 +1,28 @@
+.login-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.login-wrapper h1 {
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.login-form label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.field-error {
+  padding-left: 0.6rem;
+  border-left: 7px solid var(--color-red);
+  font-size: 0.8rem;
+}

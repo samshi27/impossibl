@@ -1,4 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { PostService } from '../../services/post';
 import { DatePipe } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -16,12 +17,16 @@ import { readTime } from '../../utils/read-time';
 export class BlogView {
   private postService = inject(PostService);
 
-  // the input name (slug) must match the route param (/route/:slug)
   slug = input<string>();
-  post = computed(() => {
-    const s = this.slug();
-    return s ? this.postService.getPostBySlug(s) : undefined;
+
+  private postResource = rxResource({
+    params: () => ({ slug: this.slug() }),
+    stream: ({ params }) => this.postService.getPostBySlug(params.slug!),
   });
+
+  post = this.postResource.value;
+  isLoading = this.postResource.isLoading;
+  error = this.postResource.error;
 
   headings = computed(() => {
     const body = this.post()?.body ?? '';

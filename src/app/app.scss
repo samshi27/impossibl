@@ -35,3 +35,20 @@
   letter-spacing: 1px;
   border-top: 3px solid var(--border);
 }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-link {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.header-user {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  text-transform: lowercase;
+}

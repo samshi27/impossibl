@@ -1,4 +1,8 @@
-@if (post(); as p) {
+@if (isLoading()) {
+  <p>Loading…</p>
+} @else if (error()) {
+  <p>Post not found.</p>
+} @else if (post(); as p) {
   <div class="blog-layout">
     <nav class="toc">
       <p>Contents</p>
@@ -24,6 +28,4 @@
       </div>
     </article>
   </div>
-} @else {
-  <p>Post not found.</p>
 }

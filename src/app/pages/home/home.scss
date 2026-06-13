@@ -1,14 +1,7 @@
-@use 'breakpoints' as bp;
+@use 'layout' as layout;
 
 .post-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  width: 100%;
-
-  @include bp.respond-below(md) {
-    grid-template-columns: 1fr;
-  }
+  @include layout.post-grid;
 }
 
 .post-grid .featured {

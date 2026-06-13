@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="login-wrapper">
+  <h1>Login</h1>
+
+  <div class="login-form">
+    <div>
+      <label>Username</label>
+      <input
+        [ngModel]="username()"
+        (ngModelChange)="username.set($event)"
+        (keyup.enter)="login()"
+        type="text"
+        placeholder="username"
+      />
+    </div>
+
+    <div>
+      <label>Password</label>
+      <input
+        [ngModel]="password()"
+        (ngModelChange)="password.set($event)"
+        (keyup.enter)="login()"
+        type="password"
+        placeholder="password"
+      />
+    </div>
+
+    @if (error()) {
+      <span class="field-error">{{ error() }}</span>
+    }
+
+    <button type="button" class="primary-button" (click)="login()" [disabled]="submitting()">
+      {{ submitting() ? 'Logging in…' : 'Login' }}
+    </button>
+  </div>
+</div>

@@ -1,11 +1,17 @@
 <div class="home-wrapper">
-  <div class="post-grid">
-    @if (featuredPost(); as featured) {
-      <app-post-card class="featured" [post]="featured" variant="magenta" [featured]="true" />
-    }
+  @if (postService.isLoading()) {
+    <p>Loading posts…</p>
+  } @else if (postService.error()) {
+    <p>Couldn't load posts. Is the API running?</p>
+  } @else {
+    <div class="post-grid">
+      @if (featuredPost(); as featured) {
+        <app-post-card class="featured" [post]="featured" variant="magenta" [featured]="true" />
+      }
 
-    @for (post of regularPosts(); track post.id; let i = $index) {
-      <app-post-card [post]="post" [variant]="variants[i % variants.length]" />
-    }
-  </div>
+      @for (post of regularPosts(); track post.id; let i = $index) {
+        <app-post-card [post]="post" [variant]="variants[i % variants.length]" />
+      }
+    </div>
+  }
 </div>

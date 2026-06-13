@@ -1,15 +1,9 @@
-@use 'breakpoints' as bp;
+@use 'layout' as layout;
 
 .tag-view h1 {
   margin-bottom: 2rem;
 }
 
 .post-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-
-  @include bp.respond-below(md) {
-    grid-template-columns: 1fr;
-  }
+  @include layout.post-grid;
 }

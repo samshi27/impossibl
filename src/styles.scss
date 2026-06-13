@@ -1,3 +1,5 @@
+@use 'effects' as fx;
+
 :root {
   --color-cream: #dcc9a9;
   --color-red: #8b422c;
@@ -43,8 +45,9 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 3px, transparent 3px);
-  background-size: 30px 30px;
+
+  @include fx.paper-texture($dot-size: 3px, $spacing: 30px, $opacity: 0.03);
+
   pointer-events: none;
 }
 
@@ -112,13 +115,5 @@ textarea:focus {
   border: 3px solid var(--border);
   border-radius: 7px;
   box-shadow: 3px 3px 0 var(--border);
-  transform: translateZ(0);
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.primary-button:hover {
-  transform: translate3d(-1px, -1px, 0);
-  box-shadow: 5px 5px 0 var(--border);
+  @include fx.lift-hover($shadow-hover: 5px);
 }

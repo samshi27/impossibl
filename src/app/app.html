@@ -1,7 +1,15 @@
 <div class="app-shell">
   <header class="app-header">
     <a class="brand" [routerLink]="['/']">I'MPOSSIBL</a>
-    <button type="button" class="primary-button" [routerLink]="['/search']">SEARCH</button>
+
+    <nav class="header-actions">
+      @if (auth.isLoggedIn()) {
+        <span class="header-user">{{ auth.user()?.username }}</span>
+        <a class="header-link" [routerLink]="['/admin']">Dashboard</a>
+        <button type="button" class="primary-button" (click)="logout()">Logout</button>
+      }
+      <button type="button" class="primary-button" [routerLink]="['/search']">Search</button>
+    </nav>
   </header>
 
   <div class="router-wrapper">

@@ -1,4 +1,5 @@
 @use 'breakpoints' as bp;
+@use 'effects' as fx;
 
 .post-card {
   cursor: pointer;
@@ -9,25 +10,18 @@
   height: 100%;
   border: 3px solid var(--border);
   border-radius: 9px;
-  box-shadow: 5px 5px 0 var(--border);
   padding: 20px;
-  transform: translateZ(0);
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.post-card:hover {
-  transform: translate3d(-1px, -1px, 0);
-  box-shadow: 7px 7px 0 var(--border);
+  box-shadow: 5px 5px 0 var(--border);
+  @include fx.lift-hover($shadow-hover: 7px);
 }
 
 .post-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.02) 2px, transparent 2px);
-  background-size: 15px 15px;
+
+  @include fx.paper-texture();
+
   pointer-events: none;
 }
 

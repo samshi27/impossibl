@@ -1,5 +1,6 @@
 import { PostStatus } from '../constants/post-status';
 
+// what components work with (typed status)
 export interface Post {
   id: number;
   title: string;
@@ -11,9 +12,8 @@ export interface Post {
   viewCount: number;
   isFeatured: boolean;
   tags: string[];
-  createdAt: string;
-  createdBy: string;
-  updatedAt: string;
-  updatedBy: string;
   publishedAt: string | null;
 }
+
+// what the API sends back (status as raw string)
+export type PostResponse = Omit<Post, 'status'> & { status: string };

@@ -2,9 +2,16 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { MARKED_OPTIONS, MarkedRenderer, provideMarkdown } from 'ngx-markdown';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+  withXsrfConfiguration,
+} from '@angular/common/http';
+import { MARKED_OPTIONS, MarkedOptions, MarkedRenderer, provideMarkdown } from 'ngx-markdown';
 import { slugify } from './utils/slugify';
+import { credentialsInterceptor } from './interceptors/credentials';
+import { csrfInterceptor } from './interceptors/csrf';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +25,7 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([credentialsInterceptor, csrfInterceptor])),
     provideMarkdown({
       markedOptions: {
         provide: MARKED_OPTIONS,
@@ -28,7 +35,7 @@ export const appConfig: ApplicationConfig = {
   ],
 };
 
-function markedOptionsFactory(): any {
+function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();
 
   renderer.heading = ({ text, depth }) => {

@@ -16,11 +16,11 @@ export class Search {
   searchTerm = signal('');
   submittedTerm = signal('');
 
-  results = computed(() => this.postService.searchPosts(this.submittedTerm()));
+  results = computed(() => this.postService.search(this.submittedTerm()));
 
   variants = CARD_VARIANTS;
 
   search() {
-    this.submittedTerm.set(this.searchTerm());
+    this.submittedTerm.set(this.searchTerm().trim());
   }
 }

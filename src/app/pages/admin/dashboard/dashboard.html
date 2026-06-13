@@ -3,21 +3,31 @@
   <button type="button" class="primary-button" [routerLink]="['/admin/create']">New Post</button>
 </div>
 
-<div class="dashboard-grid">
-  @for (post of posts(); track post.id) {
-    <div class="post-row">
-      <div>
-        <h2 class="post-row-title">{{ post.title }}</h2>
-        <p class="post-row-excerpt">{{ post.excerpt }}</p>
+@if (isLoading()) {
+  <p>Loading posts…</p>
+} @else if (error()) {
+  <p>Failed to load posts.</p>
+} @else {
+  <div class="dashboard-grid">
+    @for (post of posts(); track post.id) {
+      <div class="post-row">
+        <div>
+          <h2 class="post-row-title">{{ post.title }}</h2>
+          <p class="post-row-excerpt">{{ post.excerpt }}</p>
+        </div>
+
+        <div class="post-actions">
+          <span class="status status-{{ post.status }}">
+            {{ post.status }}
+          </span>
+
+          <button type="button" class="primary-button" [routerLink]="['/admin/edit', post.slug]">
+            Edit
+          </button>
+        </div>
       </div>
-      <div class="post-actions">
-        <span class="status status-{{ post.status }}">{{ post.status }}</span>
-        <button type="button" class="primary-button" [routerLink]="['/admin/edit', post.slug]">
-          Edit
-        </button>
-      </div>
-    </div>
-  } @empty {
-    <p>No posts yet.</p>
-  }
-</div>
+    } @empty {
+      <p>No posts yet.</p>
+    }
+  </div>
+}

@@ -1,11 +1,12 @@
 import { Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MarkdownComponent } from 'ngx-markdown';
 import { PostService } from '../../../services/post';
 import { Router } from '@angular/router';
-import { Post } from '../../../models/post';
-import { slugify } from '../../../utils/slugify';
 import { POST_STATUS, PostStatus } from '../../../constants/post-status';
+import { PostForm } from '../../../models/post-form';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-editor',
@@ -17,12 +18,22 @@ export class Editor {
   private postService = inject(PostService);
   private router = inject(Router);
   protected readonly STATUS = POST_STATUS;
+
   slug = input<string>();
-  post = computed(() => {
-    const s = this.slug();
-    return s ? this.postService.getPostBySlug(s) : undefined;
-  });
   isEditMode = computed(() => !!this.slug());
+
+  private postResource = rxResource({
+    params: () => this.slug(),
+    stream: ({ params: slug }) => {
+      if (!slug) {
+        return EMPTY;
+      }
+
+      return this.postService.getAnyPostBySlug(slug);
+    },
+  });
+
+  private post = this.postResource.value;
 
   title = linkedSignal(() => this.post()?.title ?? '');
   excerpt = linkedSignal(() => this.post()?.excerpt ?? '');
@@ -31,6 +42,8 @@ export class Editor {
   body = linkedSignal(() => this.post()?.body ?? '');
 
   attempted = signal<PostStatus | null>(null);
+  saving = signal(false);
+  saveError = signal<string | null>(null);
 
   titleValid = computed(() => this.title().trim().length > 0);
   excerptValid = computed(() => this.excerpt().trim().length > 0);
@@ -55,50 +68,40 @@ export class Editor {
   }
 
   private savePost(status: PostStatus) {
-    const now = new Date().toISOString();
-    const tags = this.tags()
-      .split(',')
-      .map((t) => t.trim())
-      .filter(Boolean);
+    const form: PostForm = {
+      title: this.title(),
+      excerpt: this.excerpt(),
+      author: this.author(),
+      body: this.body(),
+      status,
+      tags: this.tags()
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean),
+    };
+
+    this.saving.set(true);
+    this.saveError.set(null);
 
     const existing = this.post();
+    const request$ = existing
+      ? this.postService.updatePost(existing.id, form)
+      : this.postService.createPost(form);
 
-    if (existing) {
-      const updated: Post = {
-        ...existing,
-        title: this.title(),
-        excerpt: this.excerpt(),
-        author: this.author(),
-        body: this.body(),
-        tags,
-        status,
-        updatedAt: now,
-        updatedBy: this.author(),
-        publishedAt: existing.publishedAt ?? (status === POST_STATUS.PUBLISHED ? now : null),
-      };
+    request$.subscribe({
+      next: () => {
+        this.postService.refresh();
+        this.router.navigate(['/admin']);
+      },
+      error: (err) => {
+        this.saving.set(false);
+        const errorMessage =
+          status === POST_STATUS.PUBLISHED
+            ? 'Something went wrong while publishing.'
+            : 'Something went wrong while saving.';
 
-      this.postService.updatePost(updated);
-    } else {
-      const post: Post = {
-        id: Date.now(),
-        title: this.title(),
-        slug: slugify(this.title()),
-        body: this.body(),
-        excerpt: this.excerpt(),
-        author: this.author(),
-        status,
-        tags,
-        isFeatured: false,
-        viewCount: 0,
-        createdAt: now,
-        createdBy: this.author(),
-        updatedAt: now,
-        updatedBy: this.author(),
-        publishedAt: status === POST_STATUS.PUBLISHED ? now : null,
-      };
-      this.postService.addPost(post);
-    }
-
-    this.router.navigate(['/']);
+        this.saveError.set(err?.error?.detail ?? errorMessage);
+      },
+    });
   }
 }

@@ -6,6 +6,7 @@ import { Editor } from './pages/admin/editor/editor';
 import { BlogView } from './pages/blog-view/blog-view';
 import { TagView } from './pages/tag-view/tag-view';
 import { Search } from './pages/search/search';
+import { authGuard } from './guards/auth';
 
 export const routes: Routes = [
   {
@@ -27,20 +28,23 @@ export const routes: Routes = [
     component: Search,
   },
   {
-    path: 'admin',
-    component: Dashboard,
-  },
-  {
     path: 'admin/login',
     component: Login,
   },
   {
+    path: 'admin',
+    component: Dashboard,
+    canActivate: [authGuard],
+  },
+  {
     path: 'admin/create',
     component: Editor,
+    canActivate: [authGuard],
   },
   {
     path: 'admin/edit/:slug',
     component: Editor,
+    canActivate: [authGuard],
   },
   {
     path: '**',

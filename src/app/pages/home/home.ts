@@ -10,7 +10,7 @@ import { CARD_VARIANTS } from '../../constants/card-variants';
   styleUrl: './home.scss',
 })
 export class Home {
-  private postService = inject(PostService);
+  protected postService = inject(PostService);
 
   featuredPost = this.postService.featuredPost;
   regularPosts = this.postService.regularPosts;

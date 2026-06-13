@@ -13,7 +13,7 @@ import { CardVariant } from '../../constants/card-variants';
   styleUrl: './post-card.scss',
 })
 export class PostCard {
-  post = input<Post>();
+  post = input.required<Post>();
   featured = input<boolean>(false);
   variant = input<CardVariant>('blue');
   readTime = readTime;

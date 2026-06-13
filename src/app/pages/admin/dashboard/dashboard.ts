@@ -10,5 +10,12 @@ import { RouterLink } from '@angular/router';
 })
 export class Dashboard {
   private postService = inject(PostService);
+
   posts = this.postService.allPosts;
+  isLoading = this.postService.allPostsLoading;
+  error = this.postService.allPostsError;
+
+  ngOnInit() {
+    this.postService.activateAdmin();
+  }
 }

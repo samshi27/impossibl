@@ -1,0 +1,18 @@
+@mixin paper-texture($dot-size: 2px, $spacing: 15px, $opacity: 0.02) {
+  background-image: radial-gradient(rgba(255, 255, 255, $opacity) $dot-size, transparent $dot-size);
+
+  background-size: $spacing $spacing;
+}
+
+@mixin lift-hover($shadow-hover: 5px, $move-x: -1px, $move-y: -1px) {
+  transform: translateZ(0);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translate3d($move-x, $move-y, 0);
+    box-shadow: $shadow-hover $shadow-hover 0 var(--border);
+  }
+}

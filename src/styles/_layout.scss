@@ -1,0 +1,11 @@
+@use 'breakpoints' as bp;
+
+@mixin post-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  @include bp.respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}

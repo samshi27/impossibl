@@ -1,3 +1,5 @@
+<h1 class="editor-heading">{{ isEditMode() ? 'Edit Post' : 'New Post' }}</h1>
+
 <div class="post-meta">
   <div>
     <label>Title</label>
@@ -74,6 +76,12 @@
 </div>
 
 <div class="button-layout">
-  <button type="button" (click)="save()" class="primary-button">Save</button>
-  <button type="button" (click)="publish()" class="primary-button">Publish</button>
+  <button type="button" (click)="save()" class="primary-button" [disabled]="saving()">Save</button>
+  <button type="button" (click)="publish()" class="primary-button" [disabled]="saving()">
+    Publish
+  </button>
 </div>
+
+@if (saveError()) {
+  <span class="field-error">{{ saveError() }}</span>
+}

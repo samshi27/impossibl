@@ -1,4 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+
 import { PostService } from '../../services/post';
 import { PostCard } from '../../components/post-card/post-card';
 import { CARD_VARIANTS } from '../../constants/card-variants';
@@ -12,10 +14,15 @@ import { CARD_VARIANTS } from '../../constants/card-variants';
 export class TagView {
   private postService = inject(PostService);
 
-  readonly tag = input<string>();
-  readonly posts = computed(() => {
-    const tag = this.tag();
-    return tag ? this.postService.getPostsByTag(tag) : [];
+  readonly tag = input.required<string>();
+
+  private readonly postsResource = rxResource({
+    params: () => ({ tag: this.tag() }),
+    stream: ({ params }) => this.postService.getPostsByTag(params.tag),
   });
-  variants = CARD_VARIANTS;
+
+  readonly posts = computed(() => this.postsResource.value() ?? []);
+  readonly isLoading = this.postsResource.isLoading;
+  readonly error = this.postsResource.error;
+  readonly variants = CARD_VARIANTS;
 }
