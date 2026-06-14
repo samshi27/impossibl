@@ -69,8 +69,8 @@
 
   <div class="preview-pane">
     <label>Preview</label>
-    <div class="preview-content markdown-body">
-      <markdown [data]="body()" [disableSanitizer]="true" />
+    <div class="preview-content">
+      <app-post-content [post]="previewPost()" />
     </div>
   </div>
 </div>

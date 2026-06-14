@@ -7,10 +7,12 @@ import { Router } from '@angular/router';
 import { POST_STATUS, PostStatus } from '../../../constants/post-status';
 import { PostForm } from '../../../models/post-form';
 import { EMPTY } from 'rxjs';
+import { PostContentView } from '../../../models/post-content-view';
+import { PostContent } from '../../../components/post-content/post-content';
 
 @Component({
   selector: 'app-editor',
-  imports: [MarkdownComponent, FormsModule],
+  imports: [FormsModule, PostContent],
   templateUrl: './editor.html',
   styleUrl: './editor.scss',
 })
@@ -55,6 +57,16 @@ export class Editor {
     () => this.titleValid() && this.excerptValid() && this.authorValid() && this.bodyValid(),
   );
 
+  previewPost = computed<PostContentView>(() => ({
+    title: this.title() || 'Untitled',
+    author: this.author() || 'Author',
+    tags: this.tags()
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean),
+    body: this.body(),
+    publishedAt: null, // not published in preview
+  }));
   save() {
     this.attempted.set(POST_STATUS.DRAFT);
     if (!this.canSave()) return;

@@ -1,0 +1,17 @@
+<article>
+  <h1>{{ post().title }}</h1>
+
+  <p class="post-meta">
+    {{ post().author }} ·
+    @if (post().publishedAt) {
+      {{ post().publishedAt | date: 'd MMM yyyy' }} ·
+    }
+    {{ readTime(post().body) }}
+  </p>
+
+  <app-tags [tags]="post().tags" />
+
+  <div class="markdown-body">
+    <markdown [data]="post().body" [disableSanitizer]="true" />
+  </div>
+</article>

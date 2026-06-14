@@ -1,16 +1,13 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { PostService } from '../../services/post';
-import { DatePipe } from '@angular/common';
-import { MarkdownComponent } from 'ngx-markdown';
-import { RouterLink } from '@angular/router';
-import { Tags } from '../../components/tags/tags';
 import { slugify } from '../../utils/slugify';
 import { readTime } from '../../utils/read-time';
+import { PostContent } from '../../components/post-content/post-content';
 
 @Component({
   selector: 'app-blog-view',
-  imports: [DatePipe, MarkdownComponent, RouterLink, Tags],
+  imports: [PostContent],
   templateUrl: './blog-view.html',
   styleUrl: './blog-view.scss',
 })
