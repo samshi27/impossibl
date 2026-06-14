@@ -21,8 +21,12 @@ export class PostService {
   private http = inject(HttpClient);
   private base = environment.apiBaseUrl;
   private adminActive = signal(false);
+  private publishedActive = signal(false);
 
-  private publishedResource = httpResource<PostResponse[]>(() => `${this.base}/posts`);
+  private publishedResource = httpResource<PostResponse[]>(() =>
+    this.publishedActive() ? `${this.base}/posts` : undefined,
+  );
+
   private allPostsResource = httpResource<PostResponse[]>(() =>
     this.adminActive() ? `${this.base}/admin/posts` : undefined,
   );
@@ -40,6 +44,10 @@ export class PostService {
   // dashboard calls this to activate the admin fetch
   activateAdmin(): void {
     this.adminActive.set(true);
+  }
+
+  activatePublished(): void {
+    this.publishedActive.set(true);
   }
 
   getPostBySlug(slug: string): Observable<Post> {

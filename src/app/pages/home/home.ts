@@ -16,4 +16,8 @@ export class Home {
   regularPosts = this.postService.regularPosts;
 
   variants = CARD_VARIANTS;
+
+  ngOnInit() {
+    this.postService.activatePublished();
+  }
 }

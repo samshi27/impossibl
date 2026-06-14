@@ -20,6 +20,10 @@ export class Search {
 
   variants = CARD_VARIANTS;
 
+  ngOnInit() {
+    this.postService.activatePublished();
+  }
+
   search() {
     this.submittedTerm.set(this.searchTerm().trim());
   }
