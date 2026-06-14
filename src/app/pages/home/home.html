@@ -6,7 +6,9 @@
   } @else if (!postService.featuredPost() && postService.regularPosts().length === 0) {
     <div class="empty-state">
       <p>No posts yet. Time to write the first one!</p>
-      <a class="header-link" [routerLink]="['/admin/create']">Write a post</a>
+      <button type="button" class="primary-button" [routerLink]="['/admin/create']">
+        Write a post
+      </button>
     </div>
   } @else {
     <div class="post-grid">
