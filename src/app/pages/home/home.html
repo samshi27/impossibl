@@ -3,6 +3,11 @@
     <p>Loading posts…</p>
   } @else if (postService.error()) {
     <p>Couldn't load posts. Is the API running?</p>
+  } @else if (!postService.featuredPost() && postService.regularPosts().length === 0) {
+    <div class="empty-state">
+      <p>No posts yet. Time to write the first one!</p>
+      <a class="header-link" [routerLink]="['/admin/create']">Write a post</a>
+    </div>
   } @else {
     <div class="post-grid">
       @if (featuredPost(); as featured) {
