@@ -17,5 +17,6 @@ export class Dashboard implements OnInit {
 
   ngOnInit() {
     this.postService.activateAdmin();
+    this.postService.deactivatePublished();
   }
 }

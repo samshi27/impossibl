@@ -20,5 +20,6 @@ export class Home implements OnInit {
 
   ngOnInit() {
     this.postService.activatePublished();
+    this.postService.deactivateAdmin();
   }
 }

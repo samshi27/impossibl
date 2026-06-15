@@ -92,4 +92,12 @@ export class PostService {
     this.publishedResource.reload();
     this.allPostsResource.reload();
   }
+
+  deactivateAdmin(): void {
+    this.adminActive.set(false);
+  }
+
+  deactivatePublished(): void {
+    this.publishedActive.set(false);
+  }
 }
