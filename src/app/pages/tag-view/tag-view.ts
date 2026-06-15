@@ -1,6 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-
 import { PostService } from '../../services/post';
 import { PostCard } from '../../components/post-card/post-card';
 import { CARD_VARIANTS } from '../../constants/card-variants';

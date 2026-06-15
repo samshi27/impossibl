@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../services/post';
 import { PostCard } from '../../components/post-card/post-card';
@@ -10,7 +10,7 @@ import { CARD_VARIANTS } from '../../constants/card-variants';
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
-export class Search {
+export class Search implements OnInit {
   private postService = inject(PostService);
 
   searchTerm = signal('');

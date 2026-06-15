@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PostService } from '../../../services/post';
 import { RouterLink } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
   private postService = inject(PostService);
 
   posts = this.postService.allPosts;
