@@ -7,6 +7,10 @@
   <p>Loading posts…</p>
 } @else if (error()) {
   <p>Failed to load posts.</p>
+} @else if (posts().length === 0) {
+  <div class="empty-state">
+    <p>No posts yet. Hit "New Post" to write your first one.</p>
+  </div>
 } @else {
   <div class="dashboard-grid">
     @for (post of posts(); track post.id) {
