@@ -1,20 +1,50 @@
 <div class="app-shell">
   <header class="app-header">
-    <a class="brand" [routerLink]="['/']">I'MPOSSIBL</a>
+    <a class="brand" [routerLink]="['/']">i'mpossibl.</a>
 
-    <nav class="header-actions">
+    <nav class="header-nav">
       @if (auth.isLoggedIn()) {
-        <span class="header-user">{{ auth.user()?.username }}</span>
-        <a class="header-link" [routerLink]="['/admin']">Dashboard</a>
-        <button type="button" class="primary-button" (click)="logout()">Logout</button>
+        <a class="nav-link" [routerLink]="['/admin']">Dashboard</a>
       }
-      <button type="button" class="primary-button" [routerLink]="['/search']">Search</button>
+      <a class="nav-link" [routerLink]="['/search']">Search</a>
+      @if (!auth.isLoggedIn()) {
+        <a class="nav-link nav-action" (click)="login()">Login</a>
+      }
+      @if (auth.isLoggedIn()) {
+        <a class="nav-link nav-action" (click)="logout()">Logout</a>
+      }
     </nav>
+
+    <button
+      type="button"
+      class="burger primary-button"
+      (click)="toggleMenu()"
+      [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'"
+      aria-expanded="{{ menuOpen() }}"
+    >
+      {{ menuOpen() ? '✕' : '≡' }}
+    </button>
   </header>
+
+  <!-- mobile dropdown menu (slides down under the header) -->
+  @if (menuOpen()) {
+    <nav class="mobile-menu">
+      @if (auth.isLoggedIn()) {
+        <a class="mobile-link" [routerLink]="['/admin']">Dashboard</a>
+      }
+      <a class="mobile-link" [routerLink]="['/search']">Search</a>
+      @if (!auth.isLoggedIn()) {
+        <a class="mobile-link mobile-action" (click)="login()">Login</a>
+      }
+      @if (auth.isLoggedIn()) {
+        <a class="mobile-link mobile-action" (click)="logout()">Logout</a>
+      }
+    </nav>
+  }
 
   <div class="router-wrapper">
     <router-outlet />
   </div>
 
-  <footer class="app-footer">© I'MPOSSIBL, 2026</footer>
+  <footer class="app-footer">© I'MPOSSIBL., 2026</footer>
 </div>
