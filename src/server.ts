@@ -5,6 +5,7 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
@@ -35,15 +36,23 @@ app.use(
   }),
 );
 
+// in server.ts, BEFORE the Angular SSR catch-all route:
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: 'https://impossibl-api.up.railway.app',
+    changeOrigin: true,
+    // /api/posts forwards to https://impossibl-api.up.railway.app/api
+  }),
+);
+
 /**
  * Handle all other requests by rendering the Angular application.
  */
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 
