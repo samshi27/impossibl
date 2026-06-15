@@ -9,7 +9,7 @@
     {{ readTime(post().body) }}
   </p>
 
-  <app-tags [tags]="post().tags" />
+  <app-tags [tags]="post().tags" [categoryBaseRoute]="categoryBaseRoute()" />
 
   <div class="markdown-body">
     <markdown [data]="post().body" [disableSanitizer]="true" />

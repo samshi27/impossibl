@@ -12,6 +12,7 @@ import { PostContentView } from '../../models/post-content-view';
   styleUrl: './post-content.scss',
 })
 export class PostContent {
+  readonly categoryBaseRoute = input<string>();
   post = input.required<PostContentView>();
   protected readTime = readTime;
 }

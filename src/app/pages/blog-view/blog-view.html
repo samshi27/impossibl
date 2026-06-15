@@ -3,5 +3,20 @@
 } @else if (error()) {
   <p>Post not found.</p>
 } @else if (post(); as p) {
-  <app-post-content [post]="p" />
+  <div class="blog-layout">
+    @if (headings().length > 0) {
+      <nav class="toc">
+        <p>Contents</p>
+        <ul>
+          @for (h of headings(); track h.id) {
+            <li>
+              <a [routerLink]="[]" [fragment]="h.id">{{ h.text }}</a>
+            </li>
+          }
+        </ul>
+      </nav>
+    }
+
+    <app-post-content [post]="p" categoryBaseRoute="/blog/tag" />
+  </div>
 }

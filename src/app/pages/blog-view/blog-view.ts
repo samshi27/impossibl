@@ -2,12 +2,12 @@ import { Component, computed, inject, input } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { PostService } from '../../services/post';
 import { slugify } from '../../utils/slugify';
-import { readTime } from '../../utils/read-time';
 import { PostContent } from '../../components/post-content/post-content';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-blog-view',
-  imports: [PostContent],
+  imports: [PostContent, RouterLink],
   templateUrl: './blog-view.html',
   styleUrl: './blog-view.scss',
 })
@@ -36,6 +36,4 @@ export class BlogView {
         return { text, id };
       });
   });
-
-  readTime = readTime;
 }

@@ -9,5 +9,5 @@ import { RouterLink } from '@angular/router';
 })
 export class Tags {
   readonly tags = input<string[]>([]);
-  readonly categoryBaseRoute = input<string | null>(null);
+  readonly categoryBaseRoute = input<string>();
 }
