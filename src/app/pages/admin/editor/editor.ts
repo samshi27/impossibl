@@ -1,7 +1,6 @@
 import { Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { MarkdownComponent } from 'ngx-markdown';
 import { PostService } from '../../../services/post';
 import { Router } from '@angular/router';
 import { POST_STATUS, PostStatus } from '../../../constants/post-status';
@@ -42,6 +41,7 @@ export class Editor {
   author = linkedSignal(() => this.post()?.author ?? '');
   tags = linkedSignal(() => this.post()?.tags.join(', ') ?? '');
   body = linkedSignal(() => this.post()?.body ?? '');
+  isFeatured = linkedSignal(() => this.post()?.isFeatured ?? false);
 
   attempted = signal<PostStatus | null>(null);
   saving = signal(false);
@@ -67,6 +67,7 @@ export class Editor {
     body: this.body(),
     publishedAt: null, // not published in preview
   }));
+
   save() {
     this.attempted.set(POST_STATUS.DRAFT);
     if (!this.canSave()) return;
@@ -90,6 +91,7 @@ export class Editor {
         .split(',')
         .map((t) => t.trim())
         .filter(Boolean),
+      isFeatured: this.isFeatured(),
     };
 
     this.saving.set(true);

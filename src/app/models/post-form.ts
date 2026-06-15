@@ -8,6 +8,7 @@ export interface PostForm {
   author: string;
   status: PostStatus;
   tags: string[];
+  isFeatured: boolean;
 }
 
 // what the API accepts (status as raw string)

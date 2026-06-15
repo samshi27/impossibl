@@ -21,6 +21,10 @@
         </div>
 
         <div class="post-actions">
+          @if (post.isFeatured) {
+            <span class="status status-featured">featured</span>
+          }
+
           <span class="status status-{{ post.status }}">
             {{ post.status }}
           </span>

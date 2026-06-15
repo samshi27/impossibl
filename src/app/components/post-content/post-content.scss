@@ -6,7 +6,6 @@
   grid-template-columns: 1fr 1fr;
   row-gap: 2rem;
   column-gap: 2rem;
-  margin-bottom: 2rem;
 
   @include bp.respond-below(md) {
     grid-template-columns: 1fr;

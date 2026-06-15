@@ -2,13 +2,15 @@
 
 <div class="post-meta">
   <div>
-    <label>Title</label>
-    <input
-      [ngModel]="title()"
-      (ngModelChange)="title.set($event)"
-      type="text"
-      placeholder="Post title"
-    />
+    <label>
+      <span class="label">Title</span>
+      <input
+        [ngModel]="title()"
+        (ngModelChange)="title.set($event)"
+        type="text"
+        placeholder="Post title"
+      />
+    </label>
     @if (attempted() && !titleValid()) {
       <span class="field-error">
         @if (attempted() === STATUS.PUBLISHED) {
@@ -20,55 +22,75 @@
     }
   </div>
   <div>
-    <label>Excerpt</label>
-    <input
-      [ngModel]="excerpt()"
-      (ngModelChange)="excerpt.set($event)"
-      type="text"
-      placeholder="A short teaser"
-    />
+    <label>
+      <span class="label">Excerpt</span>
+      <input
+        [ngModel]="excerpt()"
+        (ngModelChange)="excerpt.set($event)"
+        type="text"
+        placeholder="A short teaser"
+      />
+    </label>
     @if (attempted() === STATUS.PUBLISHED && !excerptValid()) {
       <span class="field-error">Excerpt is required to publish.</span>
     }
   </div>
   <div>
-    <label>Author</label>
-    <input
-      [ngModel]="author()"
-      (ngModelChange)="author.set($event)"
-      type="text"
-      placeholder="Samshi"
-    />
+    <label>
+      <span class="label">Author</span>
+      <input
+        [ngModel]="author()"
+        (ngModelChange)="author.set($event)"
+        type="text"
+        placeholder="Samshi"
+      />
+    </label>
     @if (attempted() === STATUS.PUBLISHED && !authorValid()) {
       <span class="field-error">Author is required to publish.</span>
     }
   </div>
   <div>
-    <label>Tags (comma-separated)</label>
-    <input
-      [ngModel]="tags()"
-      (ngModelChange)="tags.set($event)"
-      type="text"
-      placeholder="meta, angular, webdev"
-    />
+    <label>
+      <span class="label">Tags <span class="field-hint"> (comma-separated) </span></span>
+      <input
+        [ngModel]="tags()"
+        (ngModelChange)="tags.set($event)"
+        type="text"
+        placeholder="meta, angular, webdev"
+      />
+    </label>
+  </div>
+  <div>
+    <label class="checkbox-label">
+      <input
+        type="checkbox"
+        [checked]="isFeatured()"
+        (change)="isFeatured.set($any($event.target).checked)"
+      />
+      <span class="label"
+        >Featured post <span class="field-hint">(only applies to published posts.)</span></span
+      >
+    </label>
   </div>
 </div>
 
 <div class="editor-layout">
   <div class="editor-pane">
-    <label>Body (markdown)</label>
-    <textarea
-      [ngModel]="body()"
-      (ngModelChange)="body.set($event)"
-      placeholder="Write your post in markdown..."
-    ></textarea>
+    <label>
+      <span class="label">Body (markdown)</span>
+      <textarea
+        [ngModel]="body()"
+        (ngModelChange)="body.set($event)"
+        placeholder="Write your post in markdown..."
+      ></textarea>
+    </label>
     @if (attempted() === STATUS.PUBLISHED && !bodyValid()) {
       <span class="field-error">Body is required to publish.</span>
     }
   </div>
 
   <div class="preview-pane">
-    <label>Preview</label>
+    <span class="label">Preview</span>
     <div class="preview-content">
       <app-post-content [post]="previewPost()" />
     </div>
