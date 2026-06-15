@@ -13,4 +13,12 @@
     transform: translate3d($move-x, $move-y, 0);
     box-shadow: $shadow-hover $shadow-hover 0 var(--border);
   }
+
+  &:active {
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0 0 0 var(--border);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
 }
