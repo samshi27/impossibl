@@ -38,11 +38,10 @@ app.use(
 
 // before the Angular SSR catch-all route
 app.use(
-  '/api',
   createProxyMiddleware({
+    pathFilter: '/api/**',
     target: 'https://impossibl-api.up.railway.app',
     changeOrigin: true,
-    pathRewrite: { '^/api': '/api' },
   }),
 );
 
