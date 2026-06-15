@@ -36,13 +36,13 @@ app.use(
   }),
 );
 
-// in server.ts, BEFORE the Angular SSR catch-all route:
+// before the Angular SSR catch-all route
 app.use(
   '/api',
   createProxyMiddleware({
     target: 'https://impossibl-api.up.railway.app',
     changeOrigin: true,
-    // /api/posts forwards to https://impossibl-api.up.railway.app/api
+    pathRewrite: { '^/api': '/api' },
   }),
 );
 
