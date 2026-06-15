@@ -3,23 +3,25 @@
 
   <div class="login-form">
     <div>
-      <label>Username</label>
+      <label for="username">Username</label>
       <input
         [ngModel]="username()"
         (ngModelChange)="username.set($event)"
         (keyup.enter)="login()"
         type="text"
+        id="username"
         placeholder="username"
       />
     </div>
 
     <div>
-      <label>Password</label>
+      <label for="pasword">Password</label>
       <input
         [ngModel]="password()"
         (ngModelChange)="password.set($event)"
         (keyup.enter)="login()"
         type="password"
+        id="password"
         placeholder="password"
       />
     </div>
