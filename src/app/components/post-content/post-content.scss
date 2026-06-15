@@ -1,0 +1,18 @@
+@use 'breakpoints' as bp;
+@use 'markdown' as md;
+
+.post-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 2rem;
+  column-gap: 3rem;
+  margin-bottom: 2rem;
+
+  @include bp.respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.markdown-body {
+  @include md.markdown-typography;
+}
